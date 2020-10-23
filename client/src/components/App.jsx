@@ -11,8 +11,12 @@ var movies = [
   {title: 'Hackers'},
   {title: 'The Grey'},
   {title: 'Sunshine'},
-  {title: 'Ex Machina'}
+  {title: 'Ex Machina'},
+  {title: 'Mean Streets'},
+  {title: 'Eternal Sunshine of the Spotless Mind'}
 ]
+
+var matchingResults = [];
 
 class App extends React.Component {
   constructor(props) {
@@ -20,19 +24,28 @@ class App extends React.Component {
     this.state = {
       films: movies
     }
-    // this.searchForMovie = this.searchForMovie.bind(this)
+    this.searchForMovie = this.searchForMovie.bind(this)
+    // When I un-comment the above line, it messes up my code at (I think) the line where I write ISSUE below
   }
 
   searchForMovie(movieToSearchFor) {
-    // Transfer the state of searchBar to a variable on clicking search
+    // How to
     const currentSearch = movieToSearchFor
-    console.log(currentSearch);
-    console.log('this.movies: ', this.movies)
-    for (let i = 0; i < this.movies.length; i++) {
-      if (currentSearch === this.movies[i].title) {
-        console.log('YUP')
+    console.log('currentSearch: ', currentSearch);
+    var searchArray = [];
+    //ISSUE on line below "Cannot read property length of undefined"
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].title.indexOf(currentSearch.movieSearch) > -1) {
+        searchArray.push(movies[i])
       }
+      // if (currentSearch.movieSearch === movies[i].title) {
+      //   searchArray.push(movies[i])
+      //   console.log('searchArray: ', searchArray)
+      // }
     }
+    this.setState({
+      films: searchArray
+    })
   }
 
   render() {

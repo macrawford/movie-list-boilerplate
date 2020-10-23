@@ -30,7 +30,14 @@ class SearchBar extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.searchForMovie(this.state.movieSearch)
+    this.props.searchForMovie(this.state);
+    this.reinitializeState();
+  }
+
+  reinitializeState() {
+    this.setState({
+      movieSearch: ''
+    })
   }
 
   render() {
